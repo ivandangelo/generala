@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
             <meta name="apple-mobile-web-app-capable" content="yes">
             <!-- Color theme for statusbar -->
-            <meta name="theme-color" content="#2196f3">
+            <!--<meta name="theme-color" content="#2196f3">-->
             <!-- Your app title -->
             <title>My App</title>
             <!-- Path to Framework7 Library CSS -->
@@ -29,7 +29,7 @@
             <link rel="stylesheet" href="css/style.css">
         </head>
 
-        <body>
+        <body class="theme-dark color-theme-red">
             <div id="app">
                 <!-- Statusbar overlay -->
                 <div class="statusbar"></div>
@@ -43,7 +43,7 @@
                         <div class="navbar">
                             <div class="navbar-bg"></div>
                             <div class="navbar-inner">
-                                <div class="title">Page Title</div>
+                                <div class="title">Inicio</div>
 
                             </div>
                         </div>
@@ -58,9 +58,9 @@
                                           <div class="item-inner ">
                                             <div class="item-title item-label">Jugadores</div>
                                             <div class="item-input-wrap nHairL">
-                                              <select>
-                                                <option value="Dos">Dos</option>
-                                                <option value="Tres">Tres</option>
+                                              <select id="njds">
+                                                <option value="2">Dos</option>
+                                                <option value="3">Tres</option>
                                               </select>
                                             </div>
                                           </div>
@@ -73,7 +73,7 @@
                                           <div class="item-inner">
                                             <div class="item-title item-label">Jugador 1</div>
                                             <div class="item-input-wrap nHairL">
-                                              <input maxlength="10" type="text" placeholder="Jugador 1">
+                                              <input id="j1in" maxlength="10" type="text" placeholder="Jugador 1">
                                               <span class="input-clear-button"></span>
                                             </div>
                                           </div>
@@ -86,12 +86,18 @@
                                           <div class="item-inner">
                                             <div class="item-title item-label">Jugador 2</div>
                                             <div class="item-input-wrap nHairL">
-                                              <input maxlength="10" type="text" placeholder="Jugador 2">
+                                              <input id="j2in" maxlength="10" type="text" placeholder="Jugador 2">
                                               <span class="input-clear-button"></span>
                                             </div>
                                           </div>
                                         </li>
-                                    </ul>   
+                                    </ul>
+                                    <p class="row">
+                                        <a id="ini" href="" class="col-100 button button-large button-raised button-fill">Jugar</a>
+                                        <!--
+                                        <button id="ini" class="col-100 button button-large button-raised button-fill">Jugar</button>
+                                        -->
+                                    </p>
                                 </div>
                             </div>      
                         </div>
