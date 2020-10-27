@@ -36,6 +36,31 @@ var router = mainView.router;
 var j1 = '';
 var j2 = '';
 
+function buildTablaJugador(n){
+
+    let j;
+    (n=='1') ? (j=j1) : (j=j2);
+    console.log(j);
+    for(let i=0;i<13;i++){
+        if(i==0){$$('#ptosJ'+n).append('<button class="button button-fill">'+j+'</button>');}
+        if(i>0 && i<7) { $$('#ptosJ'+n).append('<button class="button segmented segmented-raised dados">-</button>');}
+        if(i>=7 && i<=11) {$$('#ptosJ'+n).append('<button class="button segmented segmented-raised jugadas">-</button>');}
+        if(i==12) {$$('#ptosJ'+n).append('<button class="button segmented segmented-raised totJ'+n+'">0</button>');}
+    }
+
+}
+
+function buildTablaPtos(){
+
+    j=['PUNTAJES','UNO','DOS','TRES','CUATRO','CINCO','SEIS',
+    'ESCALERA','FULL','POKER','GENERALA','D.GENERALA','TOTAL'];
+
+    for(let i=0;i<13;i++){
+        $$('#jugadas').append('<button class="button button-fill">'+j[i]+'</button>');
+    }
+
+}
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     //console.log("Device is ready!");
@@ -55,7 +80,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     console.log("index ready");
     $$('#ini').on('click',function(){
         n = $$('#njds').val();
-        console.log(n);
+        //console.log(n);
         j1 = $$('#j1in').val();
         j2 = $$('#j2in').val();
         if(j1=='' || j2==''){
@@ -75,5 +100,8 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 $$(document).on('page:init', '.page[data-name="anotador"]',function(e){
     //console.log(e);
     console.log("anotador ready");
+    buildTablaPtos();
+    buildTablaJugador('1');
+    buildTablaJugador('2');
 
 });
