@@ -1,4 +1,8 @@
-  
+var j1 = '';
+var j2 = '';
+var id = '';
+var nroJugadores = 0;
+var valoresJuegos={7:20,8:30,9:40,10:50,11:100}; /*{id,pts}*/
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
@@ -26,38 +30,203 @@ var app = new Framework7({
 
       },
     ]
+});
 
-  });
+
 
 var mainView = app.views.create('.view-main');
 var router = mainView.router;
+var acDados = app.actions.create({
+    buttons:[
+        {
+            text:'Dados',
+            label: true
+        },
+        {
+            text:'Uno',
+            onClick: function() {
+                puntosDados(1);
+            }
+        },
+        {
+            text:'Dos',
+            onClick: function() {
+                puntosDados(2);
+            }
+        },
+        {
+            text:'Tres',
+            onClick: function() {
+                puntosDados(3);
+            }
+        },
+        {
+            text:'Cuatro',
+            onClick: function() {
+                puntosDados(4);
+            }
+        },
+        {
+            text:'Cinco',
+            onClick: function() {
+                puntosDados(5);
+            }
+        },
+        {
+            text:'Tachar',
+            onClick: function() {
+                tachar();
+            }
+        },
+
+    ]
+
+});
+var acJugadas = app.actions.create({
+    buttons:[
+        {
+            text:'Jugada',
+            label: true
+        },
+        {
+            text:'Servido',
+            onClick: function() {
+                puntosJuego('servido');
+            }
+        },
+        {
+            text:'No servido',
+            onClick: function() {
+                puntosJuego('noServido');
+            }
+        },
+        {
+            text:'Tachar',
+            onClick: function() {
+                tachar();
+            }
+        },
+
+    ]
+
+});
+
+var acDGenerala = app.actions.create({
+    buttons:[
+        {
+            text:'Jugada',
+            label: true
+        },
+        {
+            text:'Anotar',
+            onClick: function() {
+                puntosJuego('dGenerala');
+            }
+        },
+        {
+            text:'Tachar',
+            onClick: function() {
+                tachar();
+            }
+        },
+ 
+    ]
+
+});
+
+
 //console.log(router);
 
-var j1 = '';
-var j2 = '';
+function puntosJuego(tipoJuego){
+    let ptosASetear = 0;
+    let idAux = id.split('-');
+    ptosASetear = valoresJuegos[idAux[1]];
+    if(tipoJuego == 'servido') {
+        ptosASetear+=5;
+        $$('#'+id).text(ptosASetear);
+
+    }else if(tipoJuego == 'noServido') {
+        $$('#'+id).text(ptosASetear);
+
+    }else if(tipoJuego == 'dGenerala'){
+        $$('#'+id).text(ptosASetear);
+
+    }
+    calcularTotal(idAux[0]);
+
+
+}
+
+function puntosDados(cantidadDados){
+    let idAux= id.split('-');
+    let valorDado = parseInt(idAux[1]);
+    valorDado=valorDado*cantidadDados;
+    $$('#'+id).text(valorDado);
+    calcularTotal(idAux[0]);
+    //console.log(idAux);
+    //console.log(cantidadDados);
+
+}
+
+function calcularTotal(idJugador){
+
+}
+
+function tachar(){
+    $$('#'+id).text('x');
+
+}
+
 
 function buildTablaJugador(n){
 
     let j;
     (n=='1') ? (j=j1) : (j=j2);
-    console.log(j);
     for(let i=0;i<13;i++){
+
+        if(i>0 && i<7){
+            $$('#ptosJ'+n).append('<button id="j'+n+'-'+i+'" class="button segmented segmented-raised dados">-</button>');
+        }
+        if(i>=7 && i<=11){
+            $$('#ptosJ'+n).append('<button id="j'+n+'-'+i+'" class="button segmented segmented-raised jugada">-</button>');
+
+        }
         if(i==0){$$('#ptosJ'+n).append('<button class="button button-fill">'+j+'</button>');}
-        if(i>0 && i<7) { $$('#ptosJ'+n).append('<button class="button segmented segmented-raised dados">-</button>');}
-        if(i>=7 && i<=11) {$$('#ptosJ'+n).append('<button class="button segmented segmented-raised jugadas">-</button>');}
-        if(i==12) {$$('#ptosJ'+n).append('<button class="button segmented segmented-raised totJ'+n+'">0</button>');}
+        if(i==12) {$$('#ptosJ'+n).append('<button id="totJ'+n+'" class="button segmented segmented-raised ">0</button>');}
+
     }
+
+    /*console.log(nroJugadores);
+    for(key in puntosJuegos){
+        console.log('id '+key+' ptos '+puntosJuegos[key]);
+
+    }*/
 
 }
 
 function buildTablaPtos(){
 
-    j=['PUNTAJES','UNO','DOS','TRES','CUATRO','CINCO','SEIS',
+ j=['PUNTAJES','UNO','DOS','TRES','CUATRO','CINCO','SEIS',
     'ESCALERA','FULL','POKER','GENERALA','D.GENERALA','TOTAL'];
-
     for(let i=0;i<13;i++){
         $$('#jugadas').append('<button class="button button-fill">'+j[i]+'</button>');
+
     }
+
+
+}
+
+function terminar(){
+
+}
+
+function limpiar(){
+
+
+}
+
+function volver(){
+    console.log('entro a funcion volver');
 
 }
 
@@ -77,9 +246,9 @@ $$(document).on('deviceready', function() {
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     // Do something here when page with data-name="about" attribute loaded and initialized
     //console.log(e);
-    console.log("index ready");
+    //console.log("index ready");
     $$('#ini').on('click',function(){
-        n = $$('#njds').val();
+        nroJugadores = $$('#njds').val();
         //console.log(n);
         j1 = $$('#j1in').val();
         j2 = $$('#j2in').val();
@@ -99,9 +268,38 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
 $$(document).on('page:init', '.page[data-name="anotador"]',function(e){
     //console.log(e);
-    console.log("anotador ready");
+    //console.log("anotador ready");
     buildTablaPtos();
-    buildTablaJugador('1');
-    buildTablaJugador('2');
+
+    for(let i = 1; i<=nroJugadores;i++){
+        buildTablaJugador(i);
+    }
+
+    $$('#volver').on('click',function(){
+        volver();
+
+    });
+
+    $$('.dados').on('click',function(){
+        acDados.open();
+        //console.log($$(this).attr('id'));
+        id=$$(this).attr('id');
+
+    });
+    $$('.jugada').on('click',function(){
+
+        id=$$(this).attr('id');
+        if(id.includes('11')) {
+            acDGenerala.open();
+
+
+        }else {
+            acJugadas.open();
+        }
+
+        //console.log($$(this).attr('id'));
+
+    });
+
 
 });

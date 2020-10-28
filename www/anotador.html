@@ -1,22 +1,36 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax.  -->
 <div class="page" data-name="anotador">
-    <div class="navbar bg-color-gray">
+    <div class="navbar">
+        <div class="navbar-bg"></div>
         <div class="navbar-inner sliding">
-        <div class="left">
-            <a href="#" class="link back">
-            <i class="icon icon-back"></i>
-            <span class="ios-only">Back</span>
-            </a>
-        </div>
-        <div class="title">Anotador</div>
+            
+            <div class="left">
+                <a id="volver" class="margin">
+                    <i class="icon icon-back"></i>
+                    <span class="ios-only">Back</span>
+                </a>
+            </div>
+            
+            <div class="title">Anotador</div>
         </div>
     </div>
+                <!-- Toolbar -->
+    <div class="toolbar toolbar-bottom">
+        <div class="toolbar-inner">
+                    <!-- Toolbar links -->
+            <a id="clear" href="#" class="link">Limpiar</a>
+            <a id="fin" href="#" class="link">Terminar</a>
+         </div>
+     </div>
+
     <div class="page-content">
         <div class="block">
-            <div class="row justify-content-start"> <!--class="row justify-content-flex-start"-->
+            <div class="row justify-content-start">
                 <div id="jugadas" class="col-35 no-gap"> <!--nombres jugadas--> </div>
 
-                <div id="ptosJ1" class="margin-left"> <!--puntos equipo 1--> </div>
+                <div id="ptosJ1" class="margin-left"> <!--puntos equipo 1--> 
+
+                </div>
 
                 <div id="ptosJ2" class="margin-left"> <!--puntos equipo 2--> </div>
                 
