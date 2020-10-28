@@ -152,7 +152,7 @@ function puntosJuego(tipoJuego){
         $$('#'+id).text(ptosASetear);
 
     }
-    calcularTotal(idAux[0]);
+    calcularTotal(id);
 
 
 }
@@ -162,18 +162,34 @@ function puntosDados(cantidadDados){
     let valorDado = parseInt(idAux[1]);
     valorDado=valorDado*cantidadDados;
     $$('#'+id).text(valorDado);
-    calcularTotal(idAux[0]);
+    calcularTotal(id);
     //console.log(idAux);
     //console.log(cantidadDados);
 
 }
 
 function calcularTotal(idJugador){
+    let total=0;
+    let idAux= idJugador.split('-');
+
+    for(let i=1;i<=11;i++){
+        let contenidoCasillero=$$('#'+idAux[0]+'-'+i).text();
+        if(contenidoCasillero!='x' && contenidoCasillero!='-'){
+            total+=parseInt(contenidoCasillero);
+
+        }
+
+    }
+
+    $$('#tot'+idAux[0]).text(total);
+
+
 
 }
 
 function tachar(){
     $$('#'+id).text('x');
+    calcularTotal(id);
 
 }
 
@@ -192,7 +208,7 @@ function buildTablaJugador(n){
 
         }
         if(i==0){$$('#ptosJ'+n).append('<button class="button button-fill">'+j+'</button>');}
-        if(i==12) {$$('#ptosJ'+n).append('<button id="totJ'+n+'" class="button segmented segmented-raised ">0</button>');}
+        if(i==12) {$$('#ptosJ'+n).append('<button id="totj'+n+'" class="button segmented segmented-raised ">0</button>');}
 
     }
 
