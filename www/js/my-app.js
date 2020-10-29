@@ -208,7 +208,7 @@ function buildTablaJugador(n){
 
         }
         if(i==0){$$('#ptosJ'+n).append('<button class="button button-fill">'+j+'</button>');}
-        if(i==12) {$$('#ptosJ'+n).append('<button id="totj'+n+'" class="button segmented segmented-raised ">0</button>');}
+        if(i==12) {$$('#ptosJ'+n).append('<button id="totj'+n+'" class="button segmented segmented-raised jugadores">0</button>');}
 
     }
 
@@ -232,17 +232,21 @@ function buildTablaPtos(){
 
 }
 
-function terminar(){
-
-}
 
 function limpiar(){
-
+    console.log('entro a funcion limpiar');
+    //$$('.dados .jugada').text('-'); no funciono asi
+    $$('.dados').text('-');
+    $$('.jugada').text('-');
+    $$('.jugadores').text('0');
 
 }
 
 function volver(){
     console.log('entro a funcion volver');
+    limpiar();
+    router.navigate('/index/');
+
 
 }
 
@@ -314,6 +318,36 @@ $$(document).on('page:init', '.page[data-name="anotador"]',function(e){
         }
 
         //console.log($$(this).attr('id'));
+
+    });
+    $$('.open-confirm').on('click', function () {
+        app.dialog.confirm('Volver?Se borraran los puntos','', function () {
+        volver();
+
+        });
+    
+
+    });
+
+    $$('.open-confirm-clear').on('click', function () {
+        app.dialog.confirm('Limpiar?Se borraran los puntos','', function () {
+        limpiar();
+
+        });
+    
+
+    });
+
+    $$('.open-confirm-terminar').on('click', function () {
+
+
+        var pts1 = $$('#totj1').text();
+        var pts2 = $$('#totj2').text();
+        var msj= j1+': '+pts1+'<br>'+j2+': '+pts2; //HABIA Q PONER UN MALDITO BR, NO UN \N
+        //console.log(msj);
+        app.dialog.alert(msj, 'Puntuaciones');
+
+
 
     });
 
