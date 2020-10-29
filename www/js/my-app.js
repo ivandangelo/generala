@@ -348,7 +348,6 @@ $$(document).on('page:init', '.page[data-name="anotador"]',function(e){
         app.dialog.alert(msj, 'Puntuaciones');
 
 
-
     });
 
 
